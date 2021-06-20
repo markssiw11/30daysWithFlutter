@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/component/customSlider.dart';
+import 'package:my_app/widgets/drawer.dart';
 
 
 // ignore: must_be_immutable
@@ -18,7 +19,7 @@ class MyHomePage extends StatelessWidget{
         child: Icon(Icons.add),
         onPressed: null,
       ),
-      drawer: Drawer(),
+      drawer: MyDrawer(),
     );
   }
   

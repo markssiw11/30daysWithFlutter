@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/pages/snack_bar.dart';
 import 'package:my_app/utils/routes.dart';
 
 class LoginPage extends StatefulWidget {
