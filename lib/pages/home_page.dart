@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/component/customSlider.dart';
+import 'package:my_app/models/catalog.dart';
 import 'package:my_app/widgets/drawer.dart';
-
+import 'package:my_app/widgets/item_widgets.dart';
 
 // ignore: must_be_immutable
-class MyHomePage extends StatelessWidget{
+class MyHomePage extends StatelessWidget {
+  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<int> colorCodes = <int>[600, 500, 100];
+  final dumList = List.generate(4, (index) => CatalogModel.items[0]);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Startup Name Generator'),
       ),
-      body: Column(
-        children: [titleSection, buttonSection, floatButton, MyStatefulWidget(min: 0, max: 200)],
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: ListView.builder(
+            // padding: const EdgeInsets.symmetric(vertical: 10),
+            itemCount: dumList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ItemWidgets(item: dumList[index]);
+            }),
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add', // used by assistive technologies
@@ -22,27 +31,24 @@ class MyHomePage extends StatelessWidget{
       drawer: MyDrawer(),
     );
   }
-  
+
   Widget buttonSection = Container(
-    padding: const EdgeInsets.all(20),
-    margin: const EdgeInsets.all(40),
-    decoration: BoxDecoration(
-      // border: Border.all(width: 10, color: Colors.black38),
-      borderRadius: const BorderRadius.all(const Radius.circular(20)),
-      color: Colors.grey[200],
-      
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(Colors.blue[500], Icons.call, 'CALL'),
-        _buildButtonColumn(Colors.blue[500], Icons.near_me, 'ROUTE'),
-        _buildButtonColumn(Colors.blue[500], Icons.share, 'SHARE'),
-      ],
-    ));
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(40),
+      decoration: BoxDecoration(
+        // border: Border.all(width: 10, color: Colors.black38),
+        borderRadius: const BorderRadius.all(const Radius.circular(20)),
+        color: Colors.grey[200],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildButtonColumn(Colors.blue[500], Icons.call, 'CALL'),
+          _buildButtonColumn(Colors.blue[500], Icons.near_me, 'ROUTE'),
+          _buildButtonColumn(Colors.blue[500], Icons.share, 'SHARE'),
+        ],
+      ));
 }
-
-
 
 Widget floatButton = Container(
   height: 50.0,
@@ -58,7 +64,7 @@ Widget floatButton = Container(
 );
 
 Widget titleSection = Container(
-  padding: const EdgeInsets.fromLTRB(32, 32,32, 0),
+  padding: const EdgeInsets.fromLTRB(32, 32, 32, 0),
   child: Row(
     children: [
       Expanded(
