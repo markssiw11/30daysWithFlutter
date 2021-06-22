@@ -10,6 +10,7 @@ class Item {
   final num price;
   final String color;
   final String image;
+  final String content;
 
   Item({
     required this.id,
@@ -17,10 +18,10 @@ class Item {
     required this.desc,
     required this.price,
     required this.color,
-    required this.image
-  });
+    required this.image,
+    required this.content
 
- 
+  });
 
   Item copyWith({
     num? id,
@@ -29,6 +30,7 @@ class Item {
     num? price,
     String? color,
     String? image,
+    String? content,
   }) {
     return Item(
       id: id ?? this.id,
@@ -37,6 +39,7 @@ class Item {
       price: price ?? this.price,
       color: color ?? this.color,
       image: image ?? this.image,
+      content: content ?? this.content,
     );
   }
 
@@ -48,6 +51,7 @@ class Item {
       'price': price,
       'color': color,
       'image': image,
+      'content': content,
     };
   }
 
@@ -59,6 +63,7 @@ class Item {
       price: map['price'],
       color: map['color'],
       image: map['image'],
+      content: map['content'],
     );
   }
 
@@ -68,7 +73,7 @@ class Item {
 
   @override
   String toString() {
-    return 'Item(id: $id, name: $name, desc: $desc, price: $price, color: $color, image: $image)';
+    return 'Item(id: $id, name: $name, desc: $desc, price: $price, color: $color, image: $image, content: $content)';
   }
 
   @override
@@ -81,7 +86,8 @@ class Item {
       other.desc == desc &&
       other.price == price &&
       other.color == color &&
-      other.image == image;
+      other.image == image &&
+      other.content == content;
   }
 
   @override
@@ -91,8 +97,7 @@ class Item {
       desc.hashCode ^
       price.hashCode ^
       color.hashCode ^
-      image.hashCode;
+      image.hashCode ^
+      content.hashCode;
   }
 }
-
-

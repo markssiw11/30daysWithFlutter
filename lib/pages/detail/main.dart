@@ -12,11 +12,10 @@ class ProductDetailPage extends StatelessWidget {
     return Scaffold(
         backgroundColor: MyTheme.creamColor,
         appBar: AppBar(
-          // iconTheme: Icons.backpack_outlined,
           backwardsCompatibility: true,
           backgroundColor: MyTheme.creamColor,
         ),
-        bottomNavigationBar: productButtonBar(catalog.price).p32(),
+        bottomNavigationBar: productButtonBar(catalog.price),
         body: SafeArea(
           child: Column(
             children: [
@@ -38,7 +37,8 @@ class ProductDetailPage extends StatelessWidget {
                       catalog.name.text.xl4.bold
                           .color(MyTheme.darkBluishColor)
                           .make(),
-                      catalog.desc.text.make()
+                      catalog.desc.text.make(),
+                      catalog.content.text.textStyle(context.captionStyle!).make().p16()
                     ],
                   ).py64(),
                 ),
@@ -49,18 +49,22 @@ class ProductDetailPage extends StatelessWidget {
   }
 }
 
-ButtonBar productButtonBar(price) {
-  return ButtonBar(
-    alignment: MainAxisAlignment.spaceBetween,
-    children: [
-      "\$${price}".text.bold.xl4.red800.make().py8(),
-      ElevatedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(MyTheme.darkBluishColor),
-            shape: MaterialStateProperty.all(StadiumBorder())),
-        child: "Buy".text.make(),
-      ).wh(100, 32)
-    ],
+Container productButtonBar(price) {
+  return Container(
+    color: Colors.white,
+    child: ButtonBar(
+      alignment: MainAxisAlignment.spaceBetween,
+      children: [
+        "\$${price}".text.bold.xl4.red800.make().py8(),
+        ElevatedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all(MyTheme.darkBluishColor),
+              shape: MaterialStateProperty.all(StadiumBorder())),
+          child: "Buy".text.make(),
+        ).wh(100, 32)
+      ],
+    ).p32(),
   );
 }
