@@ -16,8 +16,11 @@ class ItemWidgets extends StatelessWidget {
         subtitle: Text(item.desc),
         trailing: Text(
           '\$${item.price}',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
         ),
+        onTap: (){
+          print('on Tap ${item.name}');
+        },
       ),
     );
   }
