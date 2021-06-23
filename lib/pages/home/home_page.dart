@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_app/models/catalog.dart';
 import 'package:my_app/utils/routes.dart';
-import 'package:my_app/widgets/themes.dart';
 import 'dart:convert';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -38,9 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.canvasColor,
       floatingActionButton: FloatingActionButton(
-        child: Icon(CupertinoIcons.shopping_cart),
-        backgroundColor: MyTheme.darkBluishColor,
+        child: Icon(CupertinoIcons.cart, color: Colors.white,),
+        backgroundColor: context.theme.buttonColor,
         onPressed: (){
           Navigator.pushNamed(context, MyRoutes.cartPage);
         },
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             CatalogHeader(),
             if (CatalogModel.items.isNotEmpty)
-              CatalogList().p16().expand()
+              CatalogList().pOnly(bottom: 16).expand()
             else
               CircularProgressIndicator().centered().expand()
           ],

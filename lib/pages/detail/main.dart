@@ -10,12 +10,12 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyTheme.creamColor,
+        backgroundColor: context.canvasColor,
         appBar: AppBar(
           backwardsCompatibility: true,
-          backgroundColor: MyTheme.creamColor,
+          backgroundColor: Colors.transparent,
         ),
-        bottomNavigationBar: productButtonBar(catalog.price),
+        bottomNavigationBar: productButtonBar(catalog.price, context),
         body: SafeArea(
           child: Column(
             children: [
@@ -30,17 +30,20 @@ class ProductDetailPage extends StatelessWidget {
                 edge: VxEdge.TOP,
                 child: Container(
                   // padding: Vx.,
-                  color: Colors.white,
+                  color: context.cardColor,
                   width: context.screenWidth,
                   child: Column(
                     children: [
                       catalog.name.text.xl4.bold
-                          .color(MyTheme.darkBluishColor)
+                          .color(context.accentColor)
                           .make(),
                       catalog.desc.text.make(),
-                      catalog.content.text.textStyle(context.captionStyle!).make().p16()
+                      catalog.content.text
+                          .textStyle(context.captionStyle!)
+                          .make()
+                          .p16()
                     ],
-                  ).py64(),
+                  ).pOnly(top: 64),
                 ),
               ))
             ],
@@ -49,9 +52,9 @@ class ProductDetailPage extends StatelessWidget {
   }
 }
 
-Container productButtonBar(price) {
+Container productButtonBar(num price, BuildContext context) {
   return Container(
-    color: Colors.white,
+    color: context.cardColor,
     child: ButtonBar(
       alignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -60,7 +63,7 @@ Container productButtonBar(price) {
           onPressed: () {},
           style: ButtonStyle(
               backgroundColor:
-                  MaterialStateProperty.all(MyTheme.darkBluishColor),
+                  MaterialStateProperty.all(context.theme.buttonColor),
               shape: MaterialStateProperty.all(StadiumBorder())),
           child: "Buy".text.make(),
         ).wh(100, 32)

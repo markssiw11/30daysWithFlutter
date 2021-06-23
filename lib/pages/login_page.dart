@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/utils/routes.dart';
-
+import 'package:velocity_x/velocity_x.dart';
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.canvasColor,
       child: SingleChildScrollView(
           child: Form(
         key: _formKey,
@@ -77,13 +77,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 20.0),
             ElevatedButton(
+              
               child: Container(
                 child: Text('Login'),
                 padding: const EdgeInsets.all(8.0),
                 margin: const EdgeInsets.symmetric(horizontal: 32.0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.deepPurple),
               ),
               onPressed: () => moveToHome(context)
             ),
@@ -93,26 +91,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-Widget loginButton = Container(
-  height: 50.0,
-  padding: const EdgeInsets.all(8.0),
-  margin: const EdgeInsets.symmetric(horizontal: 32.0),
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(5.0),
-    color: Colors.deepPurple,
-  ),
-  child: Center(
-    child: ElevatedButton(
-      child: Text(
-        'Login',
-        style: TextStyle(
-            fontSize: 20.0, color: Colors.white, fontWeight: FontWeight.w600),
-      ),
-      onPressed: () {
-        // Navigator.push('132', MyRoutes.homeRoute)
-      },
-    ),
-  ),
-);
-
