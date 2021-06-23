@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/models/cart.dart';
 import 'package:my_app/models/catalog.dart';
@@ -72,25 +73,24 @@ class _AddToCartButton extends StatefulWidget {
 }
 
 class __AddToCartButtonState extends State<_AddToCartButton> {
-  bool isAdded = false;
+  final _cart = CartModel();
 
   @override
   Widget build(BuildContext context) {
+  num numOfProduct = _cart.getNumberOfProduct(widget.catalog.id);
     return ElevatedButton(
       onPressed: () {
-          isAdded = isAdded.toggle();
-          final _cart = CartModel();
           final _catalog = CatalogModel();
           _cart.catalog = _catalog;
           _cart.add(widget.catalog);
         setState(() {});
       },
       style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(context.theme.buttonColor),
+          backgroundColor: MaterialStateProperty.all( numOfProduct > 0 ? Colors.blue : context.theme.buttonColor),
           shape: MaterialStateProperty.all(StadiumBorder()),
           ),
       child: Container(
-        child: isAdded ? Icon(Icons.done) : "+".text.make(),
+        child: numOfProduct > 0 ? numOfProduct.text.make() : Icon(CupertinoIcons.cart_badge_minus).centered(),
       ),
     ).wh(50, 50);
   }

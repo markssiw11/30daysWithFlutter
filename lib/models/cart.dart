@@ -17,7 +17,10 @@ class CartModel {
   List<Item> get items => _itemIds.map((id) => _catalog.getById(id)).toList();
   num get totalPrice =>
       items.fold(0, (total, current) => total + current.price);
-
+  num getNumberOfProduct (num id) {
+    final _listProduct = _itemIds.where((e) => e == id);
+    return _listProduct.length;
+  }
   void add (Item item) {
     _itemIds.add(item.id);
   }

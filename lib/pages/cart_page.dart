@@ -71,8 +71,10 @@ class _CartListState extends State<CartList> {
                 trailing: IconButton(
                   icon: Icon(Icons.remove_circle_outline),
                   onPressed: () {
-                    _cart.catalog = _catalog;
                     _cart.deleted(_cart.items[index]);
+                    setState(() {
+                      
+                    });
                   },
                 ),
               ),
