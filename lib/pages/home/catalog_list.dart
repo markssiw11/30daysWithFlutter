@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/core/store.dart';
 import 'package:my_app/models/cart.dart';
 import 'package:my_app/models/catalog.dart';
 import 'package:my_app/pages/detail/main.dart';
@@ -64,26 +65,23 @@ class CatalogItem extends StatelessWidget {
   }
 }
 
-class _AddToCartButton extends StatefulWidget {
+
+class _AddToCartButton extends StatelessWidget {
   final Item catalog;
   const _AddToCartButton({Key? key, required this.catalog}) : super(key: key);
 
   @override
-  __AddToCartButtonState createState() => __AddToCartButtonState();
-}
-
-class __AddToCartButtonState extends State<_AddToCartButton> {
-  final _cart = CartModel();
-
-  @override
   Widget build(BuildContext context) {
-  num numOfProduct = _cart.getNumberOfProduct(widget.catalog.id);
+  VxState.watch(context, on: [AddMutation, RemoveMutation]);
+  final CartModel _cart = (VxState.store as MyStore).cart;
+  final CatalogModel _catalog = (VxState.store as MyStore).catalog;
+
+  num numOfProduct = _cart.getNumberOfProduct(catalog.id);
     return ElevatedButton(
       onPressed: () {
-          final _catalog = CatalogModel();
           _cart.catalog = _catalog;
-          _cart.add(widget.catalog);
-        setState(() {});
+          // _cart.add(catalog);
+          AddMutation(catalog);
       },
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all( numOfProduct > 0 ? Colors.blue : context.theme.buttonColor),
@@ -92,7 +90,7 @@ class __AddToCartButtonState extends State<_AddToCartButton> {
       child: Container(
         child: numOfProduct > 0 ? numOfProduct.text.make() : Icon(CupertinoIcons.cart_badge_minus).centered(),
       ),
-    ).wh(50, 50);
+    ).wh(60, 30);
   }
 }
 
