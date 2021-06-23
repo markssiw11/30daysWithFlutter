@@ -25,17 +25,24 @@ class _CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  VxState.watch(context, on: [RemoveMutation]);
+    VxState.watch(context, on: [RemoveMutation]);
 
-  final CartModel _cart = (VxState.store as MyStore).cart;
-
+    final CartModel _cart = (VxState.store as MyStore).cart;
+    print('re render');
     return SizedBox(
         height: 200,
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          "\$${_cart.totalPrice}".text.xl5.make(),
+          VxBuilder(
+            mutations: {RemoveMutation},
+            builder: (context,store, status) {
+              return "\$${_cart.totalPrice}".text.xl5.make();
+            },
+          ),
           30.widthBox,
           ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: "Not Supported".text.make()));
+              },
               child: "Buy".text.make(),
               style: ButtonStyle(
                 backgroundColor:
@@ -46,13 +53,12 @@ class _CartTotal extends StatelessWidget {
 }
 
 class CartList extends StatelessWidget {
-
   // final CatalogModel _catalog = (VxState.store as MyStore).catalog;
 
   @override
   Widget build(BuildContext context) {
-  VxState.watch(context, on: [RemoveMutation]);
-  final CartModel _cart = (VxState.store as MyStore).cart;
+    VxState.watch(context, on: [RemoveMutation]);
+    final CartModel _cart = (VxState.store as MyStore).cart;
 
     return ListView.builder(
         itemCount: _cart.items.length,
@@ -63,7 +69,8 @@ class CartList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Image.network(_cart.items[index].image).wh(50, 50),
-                      _cart.items[index].name.text.bold.make()],
+                      _cart.items[index].name.text.bold.make()
+                    ],
                   ),
                 ),
                 leading: Icon(Icons.done),
