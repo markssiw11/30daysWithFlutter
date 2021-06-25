@@ -4,4 +4,5 @@
     static String snackBarRoute = './snack';
     static String cartPage = './cartPage';
 
+    static String webviewPage = './webviewPage';
   }

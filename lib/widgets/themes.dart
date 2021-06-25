@@ -33,10 +33,10 @@ class MyTheme {
               .copyWith(color: Colors.white)
             ),
       ));
-
   //Colors
   static Color creamColor = Color(0xfff5f5f5);
-  static Color darkCreamColor = Vx.gray900;
-  static Color darkBluishColor = Color(0xff403b58);
+  static Color darkCreamColor = Vx.gray800;
+  // static Color darkBluishColor = Color(0xff403b58);
+  static Color darkBluishColor = Color(0xFFFFA726);
   static Color lightBluishColor = Vx.indigo500;
 }

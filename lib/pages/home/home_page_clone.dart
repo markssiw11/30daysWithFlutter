@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_app/core/store.dart';
 import 'package:my_app/models/cart.dart';
-import 'package:my_app/models/product.dart';
-import 'package:my_app/pages/home/product_list.dart';
+import 'package:my_app/models/catalog.dart';
 import 'package:my_app/utils/routes.dart';
 import 'dart:convert';
 import 'package:velocity_x/velocity_x.dart';
@@ -28,10 +27,10 @@ class _MyHomePageState extends State<MyHomePage> {
   loadData() async {
     await Future.delayed(Duration(seconds: 2));
     final catalogJson =
-        await rootBundle.loadString("asserts/files/data.json");
+        await rootBundle.loadString("asserts/files/catalog.json");
     final decodedData = jsonDecode(catalogJson);
-    var productsData = decodedData["result"];
-    ProductModel.items = List.from(productsData)
+    var productsData = decodedData["products"];
+    CatalogModel.items = List.from(productsData)
         .map<Item>((item) => Item.fromMap(item))
         .toList();
     setState(() {});
@@ -57,8 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CatalogHeader(),
-            if (ProductModel.items.isNotEmpty)
-              ProductList().pOnly(bottom: 16).expand()
+            if (CatalogModel.items.isNotEmpty)
+              CatalogList().pOnly(bottom: 16).expand()
             else
               CircularProgressIndicator().centered().expand()
           ],
